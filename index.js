@@ -3,6 +3,7 @@ import path from "path";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import { fileURLToPath } from "url";
+import employeesRouter from "./routes/employees.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,6 +25,9 @@ app.set("view engine", "ejs");
 
 // Static
 app.use(express.static("public"));
+
+// Routes
+app.use("/", employeesRouter);
 
 const port = process.env.PORT;
 app.listen(port, () => {
