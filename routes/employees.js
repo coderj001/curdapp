@@ -19,10 +19,12 @@ router.post("/add/new", (req, res) => {
   };
   Employees.create(newEmployee)
     .then((employee) => {
+      req.flash("success_msg", "Employee created successfully.");
       res.redirect("/view");
     })
     .catch((err) => {
-      console.error(err);
+      req.flash("error_msg", "ERROR: " + err);
+      res.redirect("/view");
     });
 });
 
@@ -32,7 +34,8 @@ router.get("/view", (req, res) => {
       res.render("view_employees", { employees: employees });
     })
     .catch((err) => {
-      console.error(err);
+      req.flash("error_msg", "ERROR: " + err);
+      res.redirect("/view");
     });
 });
 
@@ -47,7 +50,8 @@ router.post("/search", (req, res) => {
       res.render("search", { employees: employees });
     })
     .catch((err) => {
-      console.error(err);
+      req.flash("error_msg", "ERROR: " + err);
+      res.redirect("/view");
     });
 });
 
@@ -57,7 +61,8 @@ router.get("/edit/:id", (req, res) => {
       res.render("edit", { employee: employee });
     })
     .catch((err) => {
-      console.error(err);
+      req.flash("error_msg", "ERROR: " + err);
+      res.redirect("/view");
     });
 });
 
@@ -73,21 +78,24 @@ router.put("/edit/:id", (req, res) => {
     }
   )
     .then((employee) => {
+      req.flash("success_msg", "Employee updated successfully.");
       res.redirect("/view");
     })
     .catch((err) => {
-      console.error(err);
+      req.flash("error_msg", "ERROR: " + err);
+      res.redirect("/view");
     });
 });
 
 router.delete("/edit/:id", (req, res) => {
   Employees.findOneAndDelete(req.params.id)
     .then((employee) => {
-      console.log(employee);
+      req.flash("success_msg", "Employee deleted successfully.");
       res.redirect("/view");
     })
     .catch((err) => {
-      console.error(err);
+      req.flash("error_msg", "ERROR: " + err);
+      res.redirect("/view");
     });
 });
 

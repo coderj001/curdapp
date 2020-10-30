@@ -1,0 +1,9 @@
+<% if(success_msg && success_msg!='') { %>
+<div class="notification is-success">
+    <p><%= success_msg %></p>
+</div>
+<% }else if(error_msg && error_msg!=''){ %>
+<div class="notification is-danger">
+    <p><%= error_msg %></p>
+</div>
+<% } %>
