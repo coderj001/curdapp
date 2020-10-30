@@ -1,5 +1,4 @@
 const express = require("express");
-const employees = require("../models/employees.js");
 const Employees = require("../models/employees.js");
 
 const router = express.Router();
@@ -42,10 +41,50 @@ router.get("/search", (req, res) => {
 });
 
 router.post("/search", (req, res) => {
-  let searchQuery = { name: req.body.search };
+  let searchQuery = { name: { $regex: req.body.search.trim(), $options: "i" } };
   Employees.find(searchQuery)
     .then((employees) => {
       res.render("search", { employees: employees });
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+});
+
+router.get("/edit/:id", (req, res) => {
+  Employees.findById(req.params.id)
+    .then((employee) => {
+      res.render("edit", { employee: employee });
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+});
+
+router.put("/edit/:id", (req, res) => {
+  Employees.updateOne(
+    { _id: req.params.id },
+    {
+      $set: {
+        name: req.body.name,
+        designation: req.body.designation,
+        salary: req.body.salary,
+      },
+    }
+  )
+    .then((employee) => {
+      res.redirect("/view");
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+});
+
+router.delete("/edit/:id", (req, res) => {
+  Employees.findOneAndDelete(req.params.id)
+    .then((employee) => {
+      console.log(employee);
+      res.redirect("/view");
     })
     .catch((err) => {
       console.error(err);

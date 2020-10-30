@@ -11,6 +11,11 @@
     <!-- Bulma Version 0.9.0-->
     <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
     <link rel="stylesheet" href="/css/style.css">
+    <style>
+    html{
+        background:#eee;
+    }
+    </style>
 </head>
 
 <body>
@@ -33,8 +38,8 @@
                             <div class="tabs is-right">
                                 <ul>
                                     <li ><a href="/">Home</a></li>
-                                    <li class="is-active"><a href="/view">View Employess</a></li>
-                                    <li ><a href="/add">Add New Employess</a></li>
+                                    <li><a href="/view">View Employess</a></li>
+                                    <li><a href="">Add New Employess</a></li>
                                     <li><a href="/search">Search</a></li>
                                 </ul>
                             </div>
@@ -44,49 +49,34 @@
             </nav>
         </div>
 
-        <div class="hero-body">
-            <div class="container has-text-centered">
+       <main class="container content box">
 
-                <% if(employees){ %>
-                <div class="table-container">
-                    <table class="table is-responsive is-bordered is-fullwidth">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Designation</th>
-                                <th>Salary</th>
-                                <th>Operation</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% employees.forEach((employee)=>{ %>
-                            <tr>
-                                <td><%= employee.name %></td>
-                                <td><%= employee.designation %></td>
-                                <td><%= employee.salary %></td>
-                                <td>
-                                    <a class="button is-primary" href="/edit/<%= employee._id %>">Edit</a> 
-                                    <form method="post" action="/edit/<%= employee._id %>?_method=DELETE">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <input type="submit" class="button is-danger" value="Delete">
-                                    </form>
-                                </td>
-                            </tr>
-                            <% }) %>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>Name</th>
-                                <th>Designation</th>
-                                <th>Salary</th>
-                                <th>Operation</th>
-                            </tr>
-                        </tfoot>
-                    </table>
+            <h1 class="title">Update Employess Details</h1>
+            <p class="subtitle">Thanks for using our service, cheap and reialble is our goal.</p>
+
+            <form method="post" action="/edit/<%= employee._id %>?_method=PUT">
+                <input type="hidden" name="_method" value="PUT">
+                <div class="field">
+                    <label class="label" for="the_name">Your Name</label>
+                    <input type="text" name="name" id="the_name" class="input" value="<%= employee.name %>">
                 </div>
-                <% } %>
-            </div>
-        </div>
+
+                <div class="field">
+                    <label class="label" for="designation">Designation</label>
+                    <input type="text" name="designation" id="the_designation" class="input" value="<%= employee.designation %>">
+                </div>
+
+                <div class="field">
+                    <label class="label" for="salary">Salary</label>
+                    <input type="text" name="salary" id="the_salary" class="input" value="<%= employee.salary %>">
+                </div>
+
+                <div class="field">
+                    <input type="submit" class="button is-primary is-fullwidth">
+                </div>
+            </form>
+
+        </main> 
 
         <div class="hero-foot">
             <div class="container">
