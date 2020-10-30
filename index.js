@@ -1,12 +1,9 @@
-import express from "express";
-import path from "path";
-import dotenv from "dotenv";
-import mongoose from "mongoose";
-import { fileURLToPath } from "url";
-import employeesRouter from "./routes/employees.js";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const express = require("express");
+const path = require("path");
+const dotenv = require("dotenv");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const employeesRouter = require("./routes/employees.js");
 
 const app = express();
 
@@ -20,6 +17,7 @@ mongoose.connect(process.env.DATABASE_LOCAL, {
 });
 
 // Middleware
+app.use(bodyParser.urlencoded({ extended: true }));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
