@@ -47,6 +47,7 @@
         <div class="hero-body">
             <div class="container has-text-centered">
 
+                <% if(employees){ %>
                 <div class="table-container">
                     <table class="table is-responsive is-bordered is-fullwidth">
                         <thead>
@@ -58,12 +59,14 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <% employees.forEach((employee)=>{ %>
                             <tr>
-                                <td>Mike</td>
-                                <td>Manager</td>
-                                <td>$1200</td>
+                                <td><%= employee.name %></td>
+                                <td><%= employee.designation %></td>
+                                <td><%= employee.salary %></td>
                                 <td><a class="button is-primary">Edit</a> <a class="button is-danger">Delete</a></td>
                             </tr>
+                            <% }) %>
                         </tbody>
                         <tfoot>
                             <tr>
@@ -75,6 +78,7 @@
                         </tfoot>
                     </table>
                 </div>
+                <% } %>
             </div>
         </div>
 

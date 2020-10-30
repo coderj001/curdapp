@@ -45,7 +45,44 @@
         </div>
         <div class="hero-body">
             <div class="container has-text-centered">
-                
+                <h1 class="title is-1">Search Your Employees</h1>
+                <form action="/search" method="post">
+                    <div class="field is-grouped">
+                        <p class="control is-expanded">
+                        <input class="input is-primary" type="text" placeholder="Search by name" name="search">
+                        </p>
+                        <p class="control">
+                        <button type="submit" class="button is-info"> Search </button>
+                        </p>
+                    </div> 
+                </form>
+
+                <% if(employees){ %>
+                <br>
+                <h1 class="title is-4 has-text-danger has-text-left">Search Result:</h1>
+                <br>
+
+                <div class="table-container">
+                    <table class="table is-responsive is-bordered is-fullwidth">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Designation</th>
+                                <th>Salary</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% employees.forEach((employee)=>{ %>
+                            <tr>
+                                <td><%= employee.name %></td>
+                                <td><%= employee.designation %></td>
+                                <td><%= employee.salary %></td>
+                            </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+                <% } %>
             </div>
         </div>
 
