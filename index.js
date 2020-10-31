@@ -6,8 +6,11 @@ const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const session = require("express-session");
 const flash = require("connect-flash");
+const passport = require("passport");
+const localStrategy = require("passport-local").Strategy;
 const employeesRouter = require("./routes/employees.js");
 const usersRouter = require("./routes/auth.js");
+const User = require("./models/users");
 
 const app = express();
 
@@ -29,6 +32,13 @@ app.use(
     cookie: { secure: false },
   })
 );
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new localStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");

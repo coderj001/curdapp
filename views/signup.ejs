@@ -53,25 +53,34 @@
 
        <main class="container content box">
 
-            <h1 class="title">Login Page</h1>
+            <h1 class="title">Sign Up</h1>
             <p class="subtitle">Thanks for using our service, cheap and reialble is our goal.</p>
 
-            <form method="post" action="/users/login/">
+            <form method="post" action="/users/signup/">
+
+                <div class="field">
+                    <label class="label" for="the_name">Name</label>
+                    <input type="text" name="name" id="the_name" class="input">
+                </div>
+
                 <div class="field">
                     <label class="label" for="the_email">Email Address</label>
                     <input type="email" name="email" id="the_email" class="input">
                 </div>
 
                 <div class="field">
-                    <label class="label" for="password">Password</label>
+                    <label class="label" for="the_password">Password</label>
                     <input type="password" name="password" id="the_password" class="input">
+                </div>
+
+                <div class="field">
+                    <label class="label" for="the_repassword">Re-Password</label>
+                    <input type="password" name="repassword" id="the_repassword" class="input">
                 </div>
 
                 <div class="field">
                     <input type="submit" class="button is-primary is-fullwidth">
                 </div>
-                <p class="has-centered">Or</p>
-                <a href="/users/signup" class="button is-primary is-fullwidth">Sign Up</a>
             </form>
 
         </main> 
@@ -90,5 +99,6 @@
 </body>
 
 </html>
+
 
 
