@@ -7,6 +7,7 @@ const methodOverride = require("method-override");
 const session = require("express-session");
 const flash = require("connect-flash");
 const employeesRouter = require("./routes/employees.js");
+const usersRouter = require("./routes/auth.js");
 
 const app = express();
 
@@ -45,6 +46,7 @@ app.use(express.static("public"));
 
 // Routes
 app.use("/", employeesRouter);
+app.use("/users", usersRouter);
 
 const port = process.env.PORT;
 app.listen(port, () => {

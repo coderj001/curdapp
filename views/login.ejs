@@ -11,6 +11,11 @@
     <!-- Bulma Version 0.9.0-->
     <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
     <link rel="stylesheet" href="/css/style.css">
+    <style>
+    html{
+        background:#eee;
+    }
+    </style>
 </head>
 
 <body>
@@ -32,11 +37,11 @@
                         <div class="navbar-end">
                             <div class="tabs is-right">
                                 <ul>
-                                    <li><a href="/">Home</a></li>
+                                    <li ><a href="/">Home</a></li>
                                     <li><a href="/view">View Employess</a></li>
-                                    <li><a href="/add">Add New Employess</a></li>
-                                    <li class="is-active"><a href="/search">Search</a></li>
-                                    <li><a href="/users/login">Login</a></li>
+                                    <li ><a href="">Add New Employess</a></li>
+                                    <li><a href="/search">Search</a></li>
+                                    <li class="is-active"><a href="/users/login">Login</a></li>
                                     <li><a href="/users/logout">Logout</a></li>
                                 </ul>
                             </div>
@@ -45,48 +50,29 @@
                 </div>
             </nav>
         </div>
-        <div class="hero-body">
-            <div class="container has-text-centered">
-                <h1 class="title is-1">Search Your Employees</h1>
-                <form action="/search" method="post">
-                    <div class="field is-grouped">
-                        <p class="control is-expanded">
-                        <input class="input is-primary" type="text" placeholder="Search by name" name="search">
-                        </p>
-                        <p class="control">
-                        <button type="submit" class="button is-info"> Search </button>
-                        </p>
-                    </div> 
-                </form>
 
-                <% if(employees){ %>
-                <br>
-                <h1 class="title is-4 has-text-danger has-text-left">Search Result:</h1>
-                <br>
+       <main class="container content box">
 
-                <div class="table-container">
-                    <table class="table is-responsive is-bordered is-fullwidth">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Designation</th>
-                                <th>Salary</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% employees.forEach((employee)=>{ %>
-                            <tr>
-                                <td><%= employee.name %></td>
-                                <td><%= employee.designation %></td>
-                                <td><%= employee.salary %></td>
-                            </tr>
-                            <% }) %>
-                        </tbody>
-                    </table>
+            <h1 class="title">Login Page</h1>
+            <p class="subtitle">Thanks for using our service, cheap and reialble is our goal.</p>
+
+            <form method="post" action="/users/login/">
+                <div class="field">
+                    <label class="label" for="the_email">Email Address</label>
+                    <input type="email" name="email" id="the_email" class="input">
                 </div>
-                <% } %>
-            </div>
-        </div>
+
+                <div class="field">
+                    <label class="label" for="password">Password</label>
+                    <input type="password" name="password" id="the_password" class="input">
+                </div>
+
+                <div class="field">
+                    <input type="submit" class="button is-primary is-fullwidth">
+                </div>
+            </form>
+
+        </main> 
 
         <div class="hero-foot">
             <div class="container">
@@ -102,4 +88,5 @@
 </body>
 
 </html>
+
 
